@@ -1,0 +1,1592 @@
+body{
+    background-color: #F5F3EE;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.menuLateral{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    background-color: #0D4B24;
+    color: white;
+    padding-top: 20px;
+}
+
+.logoMenuLateral{
+    width: 250px;
+    margin: 0 auto 25px auto;
+}
+
+.logoMenuLateral img{
+    width: 100%;
+}
+
+.menu ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.itemMenu{
+   display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 22px;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.subMenu{
+    margin-left: 45px;
+    padding: 0;
+}
+
+.subMenu a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 8px 0;
+}
+
+.imagemCha{
+    position: absolute;
+    bottom: 42px;
+    left: 20px;
+    width: 200px;
+}
+
+.topoEstoque{
+    margin-left: 230px;
+    width: calc(100% - 230px);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    background-color: #F5F3EE;
+}
+
+.paginaPrincipal{
+    display: block;
+    width: 35px;
+    height: 35px;
+    margin-left: 20px;
+    background-image: url(Imagens/casa.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.LinkEstoque,
+.linkEstoqueProdutos{
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    font-size: 16px;
+}
+
+.notificacao{
+    margin-left: auto;
+    background-color: transparent;
+}
+
+.sino{
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-image: url(Imagens/sino.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.PerfilUsuario{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 35px;
+}
+
+.avatar{
+    background-color: #0D4B24;
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nomeUsuario{
+    font-size: 18px;
+}
+
+main{
+    margin-left: 280px;
+    padding: 35px 45px;
+}
+
+.tituloPagina{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.subtituloPagina{
+    margin-top: 0;
+    font-weight: normal;
+    color: #555;
+}
+
+.conteinerTabela{
+    background-color: white;
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.topoTabela{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.topoTabela input{
+    padding: 10px;
+    width: 250px;
+}
+
+button,
+.botaoTabela{
+    background-color: #0D5B2A;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td{
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th{
+    background-color: #F5F3EE;
+}
+
+.graficoBarras{
+    height: 220px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 35px;
+    padding: 20px;
+}
+
+.barraItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.barra{
+    width: 35px;
+    background-color: #b8b8b8;
+    border-radius: 4px 4px 0 0;
+}
+.cardsReceitas{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 25px;
+}
+
+.cardReceita{
+    background-color: white;
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    gap: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.bolinhaReceita{
+    width: 36px;
+    height: 36px;
+    background-color: #B9F7A8;
+    color: #0D5B2A;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.cardReceita h3{
+    margin: 0 0 8px 0;
+}
+
+.cardReceita p{
+    margin: 4px 0;
+    font-size: 13px;
+}
+
+.acoesReceita{
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.acoesReceita a,
+.acoesReceita button{
+    background: none;
+    border: none;
+    color: #0D5B2A;
+    font-size: 16px;
+}
+.topoPaginaReceita{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.areaEditarReceita{
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.formularioEditar{
+    flex: 1;
+}
+
+.formularioEditar label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.campoGrande{
+    width: 100%;
+}
+
+.linhaFormulario{
+    display: flex;
+    gap: 20px;
+}
+
+.linhaFormulario div{
+    flex: 1;
+}
+
+.botoesFormulario{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.botaoCancelar{
+    background-color: #e8e8e8;
+    color: black;
+}
+
+.botaoSalvar{
+    background-color: #0D5B2A;
+    color: white;
+}
+
+.ladoDireitoReceita{
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cardResumoReceita{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+}
+
+.cardResumoReceita p{
+    margin-bottom: 4px;
+    color: #555;
+}
+
+.cardResumoReceita strong{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.cardResumoVerde{
+    background-color: #DDF7C9;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.cardResumoVerde p{
+    display: flex;
+    justify-content: space-between;
+}
+
+.botaoExcluir{
+    width: 100%;
+    margin-top: 15px;
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+}
+.topoCardsReceitas{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.topoCardsReceitas input{
+    width: 280px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.cardsReceitas{
+    display: grid;
+    grid-template-columns: repeat(4, 260px);
+    gap: 22px;
+}
+
+.cardReceita{
+    background-color: white;
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    gap: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    min-height: 125px;
+}
+
+.bolinhaReceita{
+    width: 38px;
+    height: 38px;
+    background-color: #B9F7A8;
+    color: #0D5B2A;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.infoReceita h3{
+    margin: 0 0 8px 0;
+}
+
+.infoReceita p{
+    margin: 3px 0;
+    font-size: 13px;
+}
+
+.acoesReceita{
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.acoesReceita a,
+.acoesReceita button{
+    background: none;
+    border: none;
+    color: #0D5B2A;
+    font-size: 16px;
+    padding: 0;
+}
+.fundoModal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.55);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalExcluir{
+    width: 360px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.iconeModal{
+    width: 70px;
+    height: 70px;
+    background-color: #ffd6d6;
+    color: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px auto;
+    font-size: 30px;
+}
+
+.cardModalReceita{
+    display: flex;
+    gap: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 15px 0;
+}
+
+.alertaModal{
+    background-color: #ffecec;
+    border: 1px solid #ff6b6b;
+    color: red;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.botoesModal{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.botaoConfirmarExcluir{
+    background-color: red;
+    color: white;
+}
+.paginaCadastro{
+    display: flex;
+    min-height: 100vh;
+    background-color: #F5F3EE;
+}
+
+.ladoCadastroImagem{
+    width: 45%;
+    background-color: #DDE8B8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #0D4B24;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.logoCadastro{
+    width: 250px;
+    margin-bottom: 70px;
+    margin-top: 80px;
+
+    filter: brightness(0)
+            saturate(100%)
+            invert(18%)
+            sepia(61%)
+            saturate(788%)
+            hue-rotate(96deg)
+            brightness(95%)
+            contrast(96%);
+}
+
+.ladoCadastroImagem h1{
+    font-size: 42px;
+    line-height: 1.2;
+}
+
+.ladoCadastroImagem p{
+    color: #37543A;
+    font-size: 14px;
+}
+
+.imagemCadastroCha{
+    width: 650px;
+    margin-top: 130px;
+}
+
+.ladoCadastroFormulario{
+    width: 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardCadastro{
+    width: 600px;
+    min-height: auto;
+    background-color: white;
+    padding: 55px 65px;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+
+}
+.cardCadastro form{
+    margin-top: 25px;
+}
+
+.cardCadastro label{
+    margin-top: 14px;
+}
+
+.cardCadastro input{
+    height: 42px;
+}
+
+.ladoCadastroFormulario{
+    width: 50%;
+}
+
+.ladoCadastroImagem{
+    width: 50%;
+}
+.cardCadastro h2{
+    text-align: center;
+    color: #0D4B24;
+    margin-bottom: 10px;
+}
+
+.cardCadastro p{
+    text-align: center;
+    color: #0D4B24;
+}
+
+.cardCadastro input,
+.modalCodigo input,
+.modalCodigo textarea{
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+}
+
+.cardCadastro input,
+.modalCodigo input,
+.modalCodigo textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #CFC8B8;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.linhaCodigo{
+    display: flex;
+    gap: 10px;
+}
+
+.linhaCodigo input{
+    flex: 1;
+}
+
+.botaoSolicitar,
+.botaoCadastrar{
+    background-color: #0D4B24;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botaoCadastrar{
+    width: 100%;
+    margin-top: 18px;
+}
+
+.textoEntrar{
+    font-size: 12px;
+}
+
+.textoEntrar a{
+    color: #0D4B24;
+    font-weight: bold;
+}
+
+.fundoModalCadastro{
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.55);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalCodigo{
+    width: 380px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+
+.modalCodigo h2{
+    color: #0D4B24;
+    text-align: center;
+}
+
+.modalCodigo p{
+    font-size: 12px;
+    text-align: center;
+    color: #0D4B24;
+}
+
+.fecharModal{
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: black;
+    cursor: pointer;
+}
+
+.modalCodigo textarea{
+    height: 80px;
+    resize: none;
+}
+
+.infoCodigo{
+    background-color: #C9FFA8;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 12px;
+    color: #0D4B24;
+}
+
+/* ============================================================
+   ESTILOS ADICIONAIS — Formulários internos, Parceiros, Produtos
+   ============================================================ */
+
+/* ── Inputs e selects nas páginas internas ───────────────────*/
+main input[type="text"],
+main input[type="email"],
+main input[type="number"],
+main input[type="password"],
+main input[type="date"],
+main select,
+main textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: white;
+    color: #333;
+    font-family: Arial, sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+main input[type="text"]:focus,
+main input[type="email"]:focus,
+main input[type="number"]:focus,
+main select:focus,
+main textarea:focus {
+    border-color: #0D5B2A;
+    box-shadow: 0 0 0 3px rgba(13, 91, 42, 0.08);
+}
+
+main input::placeholder,
+main textarea::placeholder {
+    color: #bbb;
+    font-size: 13px;
+}
+
+main textarea {
+    resize: none;
+}
+
+main label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* ── Linha de dois campos lado a lado ────────────────────────*/
+.linhaForm2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.linhaForm2 > div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Botões: variações ───────────────────────────────────────*/
+.btnVoltar {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btnVerde {
+    background-color: #0D5B2A;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.btnVermelho {
+    background-color: white;
+    color: #e53e3e;
+    border: 1px solid #e53e3e;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    width: 100%;
+    margin-top: 14px;
+}
+
+/* ── Topo de página com título + botão ───────────────────────*/
+.topoPagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin-bottom: 20px;
+}
+
+.topoPagina .grupoBotoes {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* ── Layout dois painéis (form + card lateral) ───────────────*/
+.areaDoisPaineis {
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+    max-width: 1200px;
+}
+
+.painelPrincipal {
+    flex: 1;
+}
+
+.painelLateral {
+    width: 270px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ── Card info lateral (editar parceiro / editar produto) ────*/
+.cardInfoLateral {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.cardInfoLateral .topoCard {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.cardInfoLateral h3 {
+    margin: 0 0 3px 0;
+    font-size: 15px;
+}
+
+.badgeAtivo {
+    background-color: #e6f7ee;
+    color: #0D5B2A;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.itemInfoCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f3f3f3;
+    font-size: 13px;
+    color: #444;
+}
+
+.itemInfoCard:last-of-type {
+    border-bottom: none;
+}
+
+/* ── Card resumo verde ───────────────────────────────────────*/
+.cardResumoVerde2 {
+    background-color: #DDF7C9;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.cardResumoVerde2 h3 {
+    margin: 0 0 14px 0;
+    font-size: 14px;
+    color: #0D4B24;
+}
+
+.linhaResumo {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 9px;
+    color: #333;
+}
+
+.linhaResumo strong {
+    color: #0D4B24;
+}
+
+/* ── Avatar circular ─────────────────────────────────────────*/
+.avatarCircular {
+    width: 42px;
+    height: 42px;
+    background-color: #0D4B24;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+/* ── Tabela de parceiros / clientes ──────────────────────────*/
+.tabelaGeral {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+.tabelaGeral th {
+    background-color: #F5F3EE;
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 13px;
+    color: #555;
+    font-weight: 600;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.tabelaGeral td {
+    padding: 11px 14px;
+    font-size: 13px;
+    border-bottom: 1px solid #f5f5f5;
+    color: #333;
+}
+
+.tabelaGeral tr:hover td {
+    background-color: #fafafa;
+}
+
+.btnAcaoEditar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: #555;
+    padding: 4px;
+}
+
+.btnAcaoExcluir {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: #e53e3e;
+    padding: 4px;
+}
+
+/* ── Barra de busca + botão ──────────────────────────────────*/
+.barraBusca {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.barraBusca input {
+    width: 280px !important;
+}
+
+/* ── Toggle lista/cards ──────────────────────────────────────*/
+.grupoToggle {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btnToggle {
+    background-color: white;
+    color: #555;
+    border: 1px solid #ddd;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btnToggle.ativo {
+    background-color: #0D5B2A;
+    color: white;
+    border-color: #0D5B2A;
+}
+
+/* ── Grid de cards de parceiros ──────────────────────────────*/
+.gridCards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.cardItem {
+    background-color: white;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cardItemTopo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.cardItemTopo h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.cardItemInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.cardItemAcoes {
+    display: flex;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* ── Modal excluir (versão parceiros) ────────────────────────*/
+.modalExcluirParceiro {
+    width: 400px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.iconeModalLixeira {
+    width: 68px;
+    height: 68px;
+    background-color: #ffe0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 26px;
+}
+
+.cardModalParceiro {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    text-align: left;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    padding: 14px;
+    margin: 14px 0;
+}
+
+.cardModalParceiro h3 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+}
+
+.cardModalParceiro p {
+    margin: 2px 0;
+    font-size: 12px;
+    color: #555;
+}
+
+.alertaModalVermelho {
+    background-color: #fff3f3;
+    border: 1px solid #ffb3b3;
+    color: #c0392b;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    text-align: left;
+    margin-bottom: 16px;
+}
+
+/* ── Seção inferior (atividades + resumo) ────────────────────*/
+.secaoInferior {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin-top: 20px;
+    align-items: flex-start;
+}
+
+.cardAtividades {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.cardAtividades h3 {
+    margin: 0 0 16px 0;
+    font-size: 15px;
+}
+
+.tabelaAtividades {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.tabelaAtividades th {
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 600;
+    color: #555;
+    border-bottom: 1px solid #eee;
+    background: none;
+}
+
+.tabelaAtividades td {
+    padding: 10px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.tagCriacao {
+    background-color: #e6f7ee;
+    color: #0D5B2A;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.tagAtualizacao {
+    background-color: #fff3e0;
+    color: #e65c00;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.linkVerTudo {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #0D5B2A;
+    text-decoration: none;
+}
+
+.cardResumoPainel {
+    width: 240px;
+    flex-shrink: 0;
+    background-color: #DDF7C9;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.cardResumoPainel h3 {
+    margin: 0 0 14px 0;
+    font-size: 14px;
+    color: #0D4B24;
+}
+.formularioParceiros label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.formularioParceiros input,
+.formularioParceiros textarea{
+    border: 1px solid #CFC8B8;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.subtituloTabela{
+    margin: 0;
+    color: #777;
+    font-size: 13px;
+}
+.formularioParceiros label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.formularioParceiros input,
+.formularioParceiros textarea,
+.formularioParceiros select{
+    border: 1px solid #CFC8B8;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+/* ===== ICONOS MENU ===== */
+
+.iconeMenu{
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.iconeSeta{
+    margin-left: auto;
+}
+
+/* ===== PAINEL DE INÍCIO ===== */
+
+.topoEstoque{
+    position: fixed;
+    top: 0;
+    left: 230px;
+    right: 0;
+    height: 70px;
+    margin-left: 0;
+    padding: 0 35px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.conteudoPrincipal{
+    margin-left: 230px;
+    padding: 90px 35px 35px;
+    width: calc(100vw - 230px);
+    box-sizing: border-box;
+}
+
+.cardsResumo{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 25px;
+}
+
+.cardResumo,
+.cardDashboard{
+    background-color: white;
+    border-radius: 8px;
+    padding: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    box-sizing: border-box;
+}
+
+.cardResumo{
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    row-gap: 12px;
+}
+
+.cardSubtitulo{
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 16px;
+}
+
+.cardNumero{
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.cardResumo a{
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 14px;
+}
+
+.linhaDashboard{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 22px;
+    margin-top: 22px;
+}
+
+.tituloTabela{
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.tituloTabela span{
+    font-size: 16px;
+}
+
+.statusCards{
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.statusCard{
+    width: 150px;
+    height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 14px;
+    box-sizing: border-box;
+}
+
+.statusCard span{
+    display: block;
+    font-size: 14px;
+}
+
+.statusCard strong{
+    font-size: 26px;
+}
+
+.movimentacaoItem{
+    display: flex;
+    justify-content: space-between;
+    margin: 18px 30px;
+    font-size: 16px;
+}
+
+.produtosVendidos,
+.produtosParados{
+    min-height: 300px;
+}
+
+.graficoBarras{
+    height: 220px;
+    padding: 20px 40px;
+    justify-content: center;
+    gap: 55px;
+}
+
+.produtosParados table th{
+    background-color: white;
+}
+
+.produtosParados table th,
+.produtosParados table td{
+    font-size: 15px;
+}
+
+.linkRelatorio{
+    color: #333;
+    font-size: 14px;
+}
+/* FORZAR CARDS SUPERIORES */
+
+.cardResumo{
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 120px;
+    gap: 8px;
+}
+
+.cardSubtitulo{
+    font-size: 15px;
+    color: #555;
+}
+
+.cardNumero{
+    font-size: 32px;
+    font-weight: 700;
+    color: #222;
+}
+
+.cardResumo a{
+    font-size: 13px;
+    color: #555;
+    text-decoration: none;
+}
+/* ============================================================
+   LISTA / CARDS TOGGLE
+   ============================================================ */
+.btnToggleView {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #555;
+    text-decoration: none;
+}
+.btnToggleView.ativo {
+    background: #0D5B2A;
+    color: white;
+    border-color: #0D5B2A;
+}
+
+/* ============================================================
+   CARDS DE CLIENTE / PARCEIRO
+   ============================================================ */
+.gridCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+.cardEntidade {
+    background: white;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+}
+.cardEntidade .avatarTopo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #0D4B24;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.cardEntidade .nomeCard {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+}
+.cardEntidade .infoCard {
+    font-size: 12px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.cardEntidade .acoesCard {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+.cardEntidade .acoesCard button {
+    flex: 1;
+    padding: 6px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+}
+.cardEntidade .acoesCard button:last-child {
+    color: #e53e3e;
+    border-color: #fecaca;
+}
+
+/* ============================================================
+   MODAL EDITAR (dois painéis)
+   ============================================================ */
+.modalDoisPaineis {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    min-width: 700px;
+    max-width: 820px;
+    text-align: left;
+}
+.modalPainelForm {
+    flex: 1;
+}
+.modalPainelInfo {
+    width: 230px;
+    flex-shrink: 0;
+}
+.cardInfoEntidade {
+    background: #f9f9f9;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.cardInfoEntidade .avatarGrande {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #0D4B24;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.cardInfoEntidade .nomeEntidade {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111;
+}
+.cardInfoEntidade .infoLinha {
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+}
+.resumoCard {
+    background: #e8f7e0;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 12px;
+}
+.resumoCard h4 {
+    margin: 0 0 12px 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0D4B24;
+}
+.resumoCard .linhaResumo {
+    font-size: 12px;
+}
+.btnExcluirVermelho {
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #e53e3e;
+    background: white;
+    color: #e53e3e;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 12px;
+}
+.btnExcluirVermelho:hover { background: #fff5f5; }
+
+/* modal mais largo */
+#modalConteudo.modalLargo {
+    max-width: 860px;
+    width: 90vw;
+}
+.modalExcluirDetalhe {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    text-align: left;
+    margin: 12px 0;
+}
+.modalExcluirDetalhe .cardMiniEntidade {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 14px;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menuLateral::-webkit-scrollbar { display: none; }

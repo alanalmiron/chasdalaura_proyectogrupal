@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Cadastrar-se</title>
+</head>
+
+<body class="paginaCadastro">
+
+    <section class="ladoCadastroImagem">
+        <img src="Imagens/Logo.png" class="logoCadastro" alt="Logo Chás da Laura">
+
+        <h1>Sistema de Gestão<br>de Estoque</h1>
+
+        <p>
+            Organize, controle e acompanhe seu estoque em<br>
+            tempo real de forma simples e inteligente
+        </p>
+
+        <img src="Imagens/ChaImagemMenu.png" class="imagemCadastroCha" alt="Chá da Laura">
+    </section>
+
+    <section class="ladoCadastroFormulario">
+
+        <div class="cardCadastro">
+
+            <h2>Cadastrar - se</h2>
+
+            <p>Crie sua conta para acessar o sistema</p>
+
+            <form>
+
+                <label>Nome completo</label>
+                <input type="text" placeholder="Digite seu nome completo">
+
+                <label>E-mail</label>
+                <input type="email" placeholder="Digite seu e-mail">
+
+                <label>Senha</label>
+                <input type="password" placeholder="Digite uma senha">
+
+                <label>Confirmar senha</label>
+                <input type="password" placeholder="Confirme sua senha">
+
+                <label>Código de acesso</label>
+
+                <div class="linhaCodigo">
+                    <input type="text" placeholder="Digite o código de acesso">
+                    <button type="button" class="botaoSolicitar">Solicitar</button>
+                </div>
+
+                <button type="submit" class="botaoCadastrar">Cadastrar</button>
+
+                <p class="textoEntrar">
+                    Já possui conta?
+                    <a href="index.html">Entrar</a>
+                </p>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <div class="fundoModalCadastro">
+
+        <div class="modalCodigo">
+
+            <button class="fecharModal">×</button>
+
+            <h2>Solicitar código de acesso</h2>
+
+            <p>
+                Preencha seus dados para solicitar seu código de acesso.<br>
+                O administrador vai analisar sua solicitação.
+            </p>
+
+            <label>Nome completo</label>
+            <input type="text" placeholder="Digite seu nome completo">
+
+            <label>E-mail</label>
+            <input type="email" placeholder="Digite seu e-mail">
+
+            <label>Observação</label>
+            <textarea placeholder="Digite sua mensagem(opcional)"></textarea>
+
+            <div class="infoCodigo">
+                <strong>ⓘ Como funciona?</strong>
+                <p>
+                    Após enviar sua solicitação, o administrador do sistema irá avaliar e enviar seu código pelo email informado.
+                </p>
+            </div>
+
+            <button class="botaoCadastrar">Enviar solicitação</button>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

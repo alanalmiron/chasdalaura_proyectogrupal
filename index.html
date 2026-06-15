@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chás da Laura</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topoEstoque">
+    <a href="#/" class="paginaPrincipal"></a>
+    <span id="breadcrumb" class="LinkEstoque">Painel inicial</span>
+    <div class="notificacao" id="btnNotificacao" style="cursor:pointer;position:relative;">
+        <i class="sino"></i>
+        <span id="badgeNoti" style="position:absolute;top:2px;right:2px;width:8px;height:8px;background:#e53e3e;border-radius:50%;display:block;"></span>
+        <div id="dropdownNoti" style="display:none;position:absolute;top:calc(100% + 10px);right:-10px;background:white;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);width:300px;z-index:9999;">
+            <div style="padding:14px 16px;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;">
+                <strong style="font-size:14px;">Notificações</strong>
+                <span id="limparNoti" style="font-size:12px;color:#0D5B2A;cursor:pointer;">Marcar todas como lidas</span>
+            </div>
+            <div id="listaNoti" style="max-height:300px;overflow-y:auto;"></div>
+            <div style="padding:12px 16px;border-top:1px solid #f0f0f0;text-align:center;">
+                <a href="#/estoque/produtos" style="font-size:12px;color:#0D5B2A;text-decoration:none;" onclick="document.getElementById('dropdownNoti').style.display='none'">Ver estoque completo →</a>
+            </div>
+        </div>
+    </div>
+    <div class="PerfilUsuario" id="perfilUsuario" style="cursor:pointer;position:relative;">
+        <div class="avatar"><span>L</span></div>
+        <span class="nomeUsuario">Laura</span>
+        <span style="font-size:10px;margin-left:2px;">&#9662;</span>
+        <div id="dropdownPerfil" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:white;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:200px;z-index:9999;overflow:hidden;">
+            <div style="padding:14px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px;">
+                <div style="width:38px;height:38px;border-radius:50%;background:#0D4B24;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;">L</div>
+                <div>
+                    <div style="font-weight:700;font-size:13px;color:#111;">Laura</div>
+                    <div style="font-size:11px;color:#888;">Administradora</div>
+                </div>
+            </div>
+            <div style="padding:6px 0;">
+                <a href="#/" style="display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:13px;color:#333;text-decoration:none;" onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background=''"
+                   onclick="document.getElementById('dropdownPerfil').style.display='none'">
+                    &#127968; Painel inicial
+                </a>
+                <button onclick="DB.reset();document.getElementById('dropdownPerfil').style.display='none';"
+                    style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:13px;color:#333;background:none;border:none;cursor:pointer;text-align:left;"
+                    onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background=''">
+                    &#128257; Restaurar dados iniciais
+                </button>
+                <div style="border-top:1px solid #f0f0f0;margin:4px 0;"></div>
+                <a href="login.html" style="display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:13px;color:#e53e3e;text-decoration:none;"
+                   onmouseenter="this.style.background='#fff5f5'" onmouseleave="this.style.background=''">
+                    &#128682; Sair
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<aside class="menuLateral">
+    <div class="logoMenuLateral">
+        <img src="Imagens/Logo.png" alt="Logo Chás da Laura">
+    </div>
+    <nav class="menu">
+        <ul>
+            <li>
+                <a href="#/" class="itemMenu">
+                    <img src="Imagens/casa.svg" class="iconeMenu" alt="">
+                    <span class="tituloMenu">Painel inicial</span>
+                </a>
+            </li>
+            <li>
+                <details data-group="cadastros">
+                    <summary class="itemMenu">
+                        <img src="Imagens/lapiz.svg" class="iconeMenu" alt="">
+                        <span class="tituloMenu">Cadastros</span>
+                        <span class="iconeSeta">&#9662;</span>
+                    </summary>
+                    <ul class="subMenu">
+                        <li><a href="#/cadastros/clientes">Clientes</a></li>
+                        <li><a href="#/cadastros/fornecedores">Fornecedores</a></li>
+                        <li><a href="#/cadastros/insumos">Insumos</a></li>
+                        <li><a href="#/cadastros/produtos">Produtos</a></li>
+                        <li><a href="#/cadastros/receitas">Receitas</a></li>
+                        <li><a href="#/cadastros/parceiros">Parceiros</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details data-group="estoque">
+                    <summary class="itemMenu">
+                        <img src="Imagens/caixa.svg" class="iconeMenu" alt="">
+                        <span class="tituloMenu">Estoque</span>
+                        <span class="iconeSeta">&#9662;</span>
+                    </summary>
+                    <ul class="subMenu">
+                        <li><a href="#/estoque/produtos">Produtos</a></li>
+                        <li><a href="#/estoque/insumos">Insumos</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details data-group="relatorios">
+                    <summary class="itemMenu">
+                        <img src="Imagens/grafico.svg" class="iconeMenu" alt="">
+                        <span class="tituloMenu">Relatórios</span>
+                        <span class="iconeSeta">&#9662;</span>
+                    </summary>
+                    <ul class="subMenu">
+                        <li><a href="#/relatorios/vendas">Vendas</a></li>
+                        <li><a href="#/relatorios/receitas">Receitas</a></li>
+                        <li><a href="#/relatorios/estoque">Estoque</a></li>
+                        <li><a href="#/relatorios/resumo">Resumo Geral</a></li>
+                        <li><a href="#/relatorios/fornecedores">Fornecedores</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <a href="#/producao" class="itemMenu">
+                    <img src="Imagens/prancheta.svg" class="iconeMenu" alt="">
+                    <span class="tituloMenu">Produção</span>
+                </a>
+            </li>
+            <li>
+                <details data-group="saidas">
+                    <summary class="itemMenu">
+                        <img src="Imagens/setaCima.svg" class="iconeMenu" alt="">
+                        <span class="tituloMenu">Saídas</span>
+                        <span class="iconeSeta">&#9662;</span>
+                    </summary>
+                    <ul class="subMenu">
+                        <li><a href="#/saidas/clientes">Clientes</a></li>
+                        <li><a href="#/saidas/parceiros">Parceiros</a></li>
+                    </ul>
+                </details>
+            </li>
+        </ul>
+    </nav>
+    <img src="Imagens/ChaImagemMenu.png" class="imagemCha" alt="Chá da Laura">
+</aside>
+
+<main id="app" class="conteudoPrincipal">
+    <div style="display:flex;align-items:center;justify-content:center;height:60vh;color:#aaa;">
+        <p>Carregando...</p>
+    </div>
+</main>
+
+<div class="fundoModal" id="modalGlobal" style="display:none; justify-content:center; align-items:center;">
+    <div id="modalConteudo" class="modalExcluir"></div>
+</div>
+
+<script src="app.js"></script>
+<script src="pages/dashboard.js"></script>
+<script src="pages/cadastros.js"></script>
+<script src="pages/estoque.js"></script>
+<script src="pages/relatorios.js"></script>
+<script src="pages/producao.js"></script>
+<script src="pages/saidas.js"></script>
+<script src="script.js"></script>
+<script>
+    /* ---- dropdown perfil ---- */
+    document.getElementById('perfilUsuario').addEventListener('click', function(e) {
+        e.stopPropagation();
+        document.getElementById('dropdownNoti').style.display = 'none';
+        const d = document.getElementById('dropdownPerfil');
+        d.style.display = d.style.display === 'none' ? 'block' : 'none';
+    });
+
+    /* ---- dropdown notificações ---- */
+    function gerarNotificacoes() {
+        const alertas = [];
+        DB.produtos.forEach(p => {
+            if (p.status === 'zerado')  alertas.push({ icon:'🔴', texto: `<strong>${p.nome}</strong> está sem estoque`, sub: 'Produto · Zerado' });
+            else if (p.status === 'baixo') alertas.push({ icon:'🟠', texto: `<strong>${p.nome}</strong> com estoque baixo`, sub: `Produto · ${p.estoque} ${p.unidade}` });
+        });
+        DB.insumos.forEach(i => {
+            if (i.status === 'crítico') alertas.push({ icon:'🔴', texto: `<strong>${i.nome}</strong> em nível crítico`, sub: `Insumo · ${i.estoque} ${i.unidade}` });
+            else if (i.status === 'baixo') alertas.push({ icon:'🟠', texto: `<strong>${i.nome}</strong> com estoque baixo`, sub: `Insumo · ${i.estoque} ${i.unidade}` });
+        });
+        return alertas;
+    }
+
+    function renderNoti() {
+        const lista = document.getElementById('listaNoti');
+        const badge = document.getElementById('badgeNoti');
+        const alertas = gerarNotificacoes();
+        badge.style.display = alertas.length ? 'block' : 'none';
+        if (!alertas.length) {
+            lista.innerHTML = '<div style="padding:24px 16px;text-align:center;color:#aaa;font-size:13px;">Sem notificações pendentes ✓</div>';
+            return;
+        }
+        lista.innerHTML = alertas.map(a => `
+            <div style="padding:12px 16px;border-bottom:1px solid #f9f9f9;display:flex;gap:10px;align-items:flex-start;">
+                <span style="font-size:16px;margin-top:1px;">${a.icon}</span>
+                <div>
+                    <div style="font-size:13px;color:#222;">${a.texto}</div>
+                    <div style="font-size:11px;color:#aaa;margin-top:2px;">${a.sub}</div>
+                </div>
+            </div>`).join('');
+    }
+
+    document.getElementById('btnNotificacao').addEventListener('click', function(e) {
+        e.stopPropagation();
+        document.getElementById('dropdownPerfil').style.display = 'none';
+        const d = document.getElementById('dropdownNoti');
+        const abrir = d.style.display === 'none';
+        d.style.display = abrir ? 'block' : 'none';
+        if (abrir) renderNoti();
+    });
+
+    document.getElementById('limparNoti').addEventListener('click', function(e) {
+        e.stopPropagation();
+        document.getElementById('listaNoti').innerHTML = '<div style="padding:24px 16px;text-align:center;color:#aaa;font-size:13px;">Sem notificações pendentes ✓</div>';
+        document.getElementById('badgeNoti').style.display = 'none';
+    });
+
+    document.addEventListener('click', function() {
+        document.getElementById('dropdownPerfil').style.display = 'none';
+        document.getElementById('dropdownNoti').style.display = 'none';
+    });
+</script>
+</body>
+</html>
