@@ -15,16 +15,30 @@
         'cadastros/parceiros':   'Cadastros &rsaquo; Parceiros',
         'estoque/produtos':      'Estoque &rsaquo; Produtos',
         'estoque/insumos':       'Estoque &rsaquo; Insumos',
-        'relatorios/hub':         'Relatórios',
-        'relatorios/vendas':     'Relatórios &rsaquo; Vendas',
-        'relatorios/financas':   'Relatórios &rsaquo; Finanças',
-        'relatorios/margem':     'Relatórios &rsaquo; Margem de Lucro',
-        'relatorios/clientes':   'Relatórios &rsaquo; Clientes',
-        'relatorios/receitas':   'Relatórios &rsaquo; Receitas',
-        'relatorios/estoque':    'Relatórios &rsaquo; Estoque',
-        'relatorios/resumo':     'Relatórios &rsaquo; Resumo Geral',
-        'relatorios/fornecedores':'Relatórios &rsaquo; Fornecedores',
-        'relatorios/producao':   'Relatórios &rsaquo; Produção',
+        'relatorios/hub':                   'Relatórios',
+        'relatorios/vendas':                'Relatórios &rsaquo; Vendas',
+        'relatorios/vendas/diario':         'Relatórios &rsaquo; Faturamento Diário',
+        'relatorios/vendas/categoria':      'Relatórios &rsaquo; Faturamento por Categoria',
+        'relatorios/vendas/pagamento':      'Relatórios &rsaquo; Vendas por Pagamento',
+        'relatorios/financas':              'Relatórios &rsaquo; Finanças',
+        'relatorios/financas/movimentos':   'Relatórios &rsaquo; Entradas x Saídas',
+        'relatorios/financas/evolucao':     'Relatórios &rsaquo; Evolução do Faturamento',
+        'relatorios/margem':                'Relatórios &rsaquo; Margem de Lucro',
+        'relatorios/margem/analise':        'Relatórios &rsaquo; Análise de Lucratividade',
+        'relatorios/margem/evolucao':       'Relatórios &rsaquo; Evolução da Margem',
+        'relatorios/margem/contribuicao':   'Relatórios &rsaquo; Margem de Contribuição x Receita',
+        'relatorios/clientes':              'Relatórios &rsaquo; Clientes',
+        'relatorios/receitas':              'Relatórios &rsaquo; Receitas',
+        'relatorios/receitas/composicao':   'Relatórios &rsaquo; Composição da Receita',
+        'relatorios/receitas/rentabilidade':'Relatórios &rsaquo; Rentabilidade Média',
+        'relatorios/receitas/evolucao':     'Relatórios &rsaquo; Evolução da Receita',
+        'relatorios/estoque':               'Relatórios &rsaquo; Insumos',
+        'relatorios/estoque/situacao':      'Relatórios &rsaquo; Situação do Estoque',
+        'relatorios/resumo':                'Relatórios &rsaquo; Resumo Geral',
+        'relatorios/fornecedores':          'Relatórios &rsaquo; Fornecedores',
+        'relatorios/producao':              'Relatórios &rsaquo; Produção',
+        'relatorios/producao/mais':         'Relatórios &rsaquo; Mais Produzidos',
+        'relatorios/producao/insumos':      'Relatórios &rsaquo; Insumos Consumidos',
         'producao':              'Produção',
         'producao/nova':         'Produção &rsaquo; Nova produção',
         'saidas/clientes':       'Saídas &rsaquo; Clientes',
@@ -38,6 +52,7 @@
         return {
             module: parts[0] || '',
             sub:    parts[1] || '',
+            sub2:   parts[2] || '',
             full:   raw,
         };
     }
@@ -70,7 +85,7 @@
 
     /* ---------- route ---------- */
     function navigate() {
-        const { module, sub, full } = parseHash();
+        const { module, sub, sub2, full } = parseHash();
         const app = document.getElementById('app');
         if (!app) return;
 
@@ -93,7 +108,9 @@
             case 'estoque':
                 page = Pages.estoque;   param = sub || 'produtos'; break;
             case 'relatorios':
-                page = Pages.relatorios; param = sub || 'hub'; break;
+                page = Pages.relatorios;
+                param = sub2 ? sub + '/' + sub2 : (sub || 'hub');
+                break;
             case 'producao':
                 page = Pages.producao;  param = sub || ''; break;
             case 'saidas':

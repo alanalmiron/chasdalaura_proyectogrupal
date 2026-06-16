@@ -1590,3 +1590,207 @@ main label {
 }
 
 .menuLateral::-webkit-scrollbar { display: none; }
+
+/* ============================================================
+   RELATÓRIOS — Estilos específicos (baseados no Figma)
+   ============================================================ */
+
+/* -- Tabela com cabeçalho verde (padrão Figma) -- */
+.tabelaRelatorio {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 12px;
+}
+.tabelaRelatorio thead th {
+    background-color: #0D5B2A;
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.tabelaRelatorio td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+    font-size: 12px;
+}
+.tabelaRelatorio tr:hover td { background-color: #f9f9f9; }
+.tabelaRelatorio tfoot td {
+    background-color: #e8f5e0;
+    font-weight: 700;
+    color: #0D5B2A;
+    padding: 10px 12px;
+    font-size: 12px;
+}
+
+/* -- Linhas coloridas Entrada/Saída -- */
+.tabelaRelatorio .rowEntrada td { background-color: #e8f5e0; }
+.tabelaRelatorio .rowSaida td   { background-color: #fff0f0; }
+
+/* -- Badge Entrada / Saída / status -- */
+.badgeEntrada { background:#e8f5e0; color:#0D5B2A; font-size:11px; padding:2px 8px; border-radius:20px; font-weight:600; display:inline-block; }
+.badgeSaida   { background:#fde8e8; color:#c0392b; font-size:11px; padding:2px 8px; border-radius:20px; font-weight:600; display:inline-block; }
+.badgeConcluido { background:#e8f5e0; color:#0D5B2A; font-size:11px; padding:2px 8px; border-radius:20px; font-weight:600; display:inline-block; }
+.badgeZerado    { background:#fde8e8; color:#c0392b; font-size:11px; padding:2px 8px; border-radius:20px; font-weight:600; display:inline-block; }
+.badgeBaixo     { background:#fff3e0; color:#e65c00; font-size:11px; padding:2px 8px; border-radius:20px; font-weight:600; display:inline-block; }
+.badgeNormal    { background:#e8f5e0; color:#0D5B2A; font-size:11px; padding:2px 8px; border-radius:20px; font-weight:600; display:inline-block; }
+.badgeCritico   { background:#fde8e8; color:#c0392b; font-size:11px; padding:2px 8px; border-radius:20px; font-weight:600; display:inline-block; }
+
+/* -- Botões exportar (Figma) -- */
+.btnExportExcel {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border: 1px solid #0D5B2A;
+    background: white; color: #0D5B2A; border-radius: 6px;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    text-decoration: none;
+}
+.btnExportExcel:hover { background: #f0fff4; }
+.btnDownloadPdf {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border: 1px solid #e53e3e;
+    background: white; color: #e53e3e; border-radius: 6px;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    text-decoration: none;
+}
+.btnDownloadPdf:hover { background: #fff5f5; }
+
+/* -- KPI cards com ícone (Figma) -- */
+.kpiGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+}
+.kpiCard {
+    background: white;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+.kpiIcone {
+    width: 48px; height: 48px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+}
+.kpiIcone.verde  { background: #e8f5e0; }
+.kpiIcone.azul   { background: #e8f0ff; }
+.kpiIcone.laranja{ background: #fff3e0; }
+.kpiIcone.vermelho { background: #fde8e8; }
+.kpiTexto { flex: 1; }
+.kpiLabel { font-size: 12px; color: #666; margin: 0 0 4px 0; }
+.kpiValor { font-size: 20px; font-weight: 700; color: #111; margin: 0 0 2px 0; }
+.kpiSub   { font-size: 11px; color: #888; }
+.kpiTrend { font-size: 11px; color: #0D5B2A; margin-top: 2px; }
+.kpiTrend.neg { color: #e53e3e; }
+
+/* -- Barra de filtros (Figma) -- */
+.filtrosPagina {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+.filtroItem { display: flex; flex-direction: column; gap: 4px; }
+.filtroItem label { font-size: 12px; font-weight: 600; color: #444; }
+.filtroItem select,
+.filtroItem input[type="date"] {
+    padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px;
+    font-size: 13px; min-width: 150px; background: white;
+}
+.filtrosBotoes { display: flex; gap: 8px; align-items: center; margin-top: 18px; }
+
+/* -- Mini gráficos (Figma - 3 por linha) -- */
+.miniChartsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 0 0 20px 0;
+}
+.miniChartBox {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: relative;
+}
+.miniChartTitulo {
+    font-size: 11px; font-weight: 600; color: #555;
+    margin: 0 0 2px 0; text-transform: uppercase; letter-spacing: 0.4px;
+}
+.miniChartValor {
+    font-size: 18px; font-weight: 700; color: #0D5B2A;
+    margin: 0 0 8px 0;
+}
+.miniChartExport {
+    position: absolute; top: 12px; right: 12px;
+    background: none; border: none; cursor: pointer;
+    font-size: 14px; color: #aaa;
+}
+
+/* -- Barra de ordenar / buscar (dentro das tabelas) -- */
+.tabelaTopBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 12px;
+}
+.buscaComIcone {
+    display: flex; align-items: center;
+    border: 1px solid #ddd; border-radius: 6px;
+    background: white; padding: 0 10px; gap: 6px;
+}
+.buscaComIcone input {
+    border: none; outline: none; padding: 8px 0;
+    font-size: 13px; width: 200px; background: transparent;
+}
+.ordenarSelect {
+    display: flex; align-items: center; gap: 6px; font-size: 12px; color: #555;
+}
+.ordenarSelect select {
+    padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px;
+    font-size: 12px; color: #333; background: white;
+}
+
+/* -- Topo de relatório com título + export -- */
+.topoRelatorio {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.topoRelatorio .exportBtns {
+    display: flex; gap: 8px; flex-shrink: 0;
+}
+
+/* -- SVG Charts (barras simples) -- */
+.svgBarChart { width: 100%; height: 90px; }
+.svgLineChart { width: 100%; height: 80px; overflow: visible; }
+
+/* -- Tag categoria colorida (Figma) -- */
+.tagCha        { background:#e8f5e0; color:#0D5B2A; font-size:11px; padding:2px 7px; border-radius:4px; font-weight:600; display:inline-block; }
+.tagAromatizador { background:#e8f0ff; color:#3a5ba0; font-size:11px; padding:2px 7px; border-radius:4px; font-weight:600; display:inline-block; }
+.tagAcessorio  { background:#fff3e0; color:#e65c00; font-size:11px; padding:2px 7px; border-radius:4px; font-weight:600; display:inline-block; }
+
+/* -- Tabela relatório search container -- */
+.relConteiner {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    margin-top: 0;
+}
+
