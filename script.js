@@ -15,11 +15,16 @@
         'cadastros/parceiros':   'Cadastros &rsaquo; Parceiros',
         'estoque/produtos':      'Estoque &rsaquo; Produtos',
         'estoque/insumos':       'Estoque &rsaquo; Insumos',
+        'relatorios/hub':         'Relatórios',
         'relatorios/vendas':     'Relatórios &rsaquo; Vendas',
+        'relatorios/financas':   'Relatórios &rsaquo; Finanças',
+        'relatorios/margem':     'Relatórios &rsaquo; Margem de Lucro',
+        'relatorios/clientes':   'Relatórios &rsaquo; Clientes',
         'relatorios/receitas':   'Relatórios &rsaquo; Receitas',
         'relatorios/estoque':    'Relatórios &rsaquo; Estoque',
         'relatorios/resumo':     'Relatórios &rsaquo; Resumo Geral',
         'relatorios/fornecedores':'Relatórios &rsaquo; Fornecedores',
+        'relatorios/producao':   'Relatórios &rsaquo; Produção',
         'producao':              'Produção',
         'producao/nova':         'Produção &rsaquo; Nova produção',
         'saidas/clientes':       'Saídas &rsaquo; Clientes',
@@ -88,7 +93,7 @@
             case 'estoque':
                 page = Pages.estoque;   param = sub || 'produtos'; break;
             case 'relatorios':
-                page = Pages.relatorios; param = sub || 'vendas'; break;
+                page = Pages.relatorios; param = sub || 'hub'; break;
             case 'producao':
                 page = Pages.producao;  param = sub || ''; break;
             case 'saidas':
