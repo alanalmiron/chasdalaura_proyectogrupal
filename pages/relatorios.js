@@ -71,59 +71,169 @@
             '</div></div>';
     }
 
-    /* ── Mini gráfico barras SVG ──────────────────────────── */
-    function barChart(valores, cor) {
+    /* ── Gráfico de barras SVG (com eixos e gridlines) ───── */
+    function barChart(valores, cor, labels) {
         cor = cor || '#0D5B2A';
+        var W = 300; var H = 130;
+        var padL = 38; var padB = labels ? 22 : 8; var padT = 10; var padR = 8;
+        var cW = W - padL - padR; var cH = H - padB - padT;
         var max = Math.max.apply(null, valores) || 1;
-        var w = 260 / valores.length;
+        var nGrid = 4;
+        var grids = '';
+        var yLabels = '';
+        for (var g = 0; g <= nGrid; g++) {
+            var gy = padT + cH - Math.round(g / nGrid * cH);
+            var gv = Math.round(g / nGrid * max);
+            grids += '<line x1="' + padL + '" y1="' + gy + '" x2="' + (W-padR) + '" y2="' + gy + '" stroke="#f0f0f0" stroke-width="1"/>';
+            yLabels += '<text x="' + (padL-4) + '" y="' + (gy+4) + '" text-anchor="end" font-size="8" fill="#aaa">' + (gv >= 1000 ? (gv/1000).toFixed(1)+'k' : gv) + '</text>';
+        }
+        var bW = (cW / valores.length) * 0.65;
+        var bGap = cW / valores.length;
         var bars = valores.map(function(v, i) {
-            var h = Math.round(v / max * 70);
-            return '<rect x="' + (i*w+2) + '" y="' + (75-h) + '" width="' + (w-4) + '" height="' + h + '" fill="' + cor + '" rx="2" opacity="0.85"/>';
+            var h = Math.max(2, Math.round(v / max * cH));
+            var bx = padL + i * bGap + (bGap - bW) / 2;
+            var by = padT + cH - h;
+            var lbl = labels && labels[i] ? '<text x="' + (bx + bW/2).toFixed(1) + '" y="' + (H-4) + '" text-anchor="middle" font-size="7" fill="#999">' + labels[i] + '</text>' : '';
+            return '<rect x="' + bx.toFixed(1) + '" y="' + by + '" width="' + bW.toFixed(1) + '" height="' + h + '" fill="' + cor + '" rx="3"/>' + lbl;
         }).join('');
-        return '<svg class="svgBarChart" viewBox="0 0 260 80">' + bars + '</svg>';
+        var base = '<line x1="' + padL + '" y1="' + (padT+cH) + '" x2="' + (W-padR) + '" y2="' + (padT+cH) + '" stroke="#e0e0e0" stroke-width="1"/>';
+        return '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:' + H + 'px;">' + grids + base + yLabels + bars + '</svg>';
     }
 
-    /* ── Mini gráfico linha SVG ───────────────────────────── */
-    function lineChart(valores, cor) {
+    /* ── Gráfico de área SVG (linha + fill degradê) ───────── */
+    function lineChart(valores, cor, labels, cor2) {
         cor = cor || '#0D5B2A';
+        var W = 300; var H = 130;
+        var padL = 38; var padB = labels ? 22 : 8; var padT = 10; var padR = 8;
+        var cW = W - padL - padR; var cH = H - padB - padT;
         var max = Math.max.apply(null, valores) || 1;
         var min = Math.min.apply(null, valores);
+        var nGrid = 4;
+        var grids = '';
+        var yLabels = '';
+        for (var g = 0; g <= nGrid; g++) {
+            var gy = padT + cH - Math.round(g / nGrid * cH);
+            var gv = min + Math.round(g / nGrid * (max - min));
+            grids += '<line x1="' + padL + '" y1="' + gy + '" x2="' + (W-padR) + '" y2="' + gy + '" stroke="#f0f0f0" stroke-width="1"/>';
+            yLabels += '<text x="' + (padL-4) + '" y="' + (gy+4) + '" text-anchor="end" font-size="8" fill="#aaa">' + (gv >= 1000 ? (gv/1000).toFixed(1)+'k' : gv) + '</text>';
+        }
         var pts = valores.map(function(v, i) {
-            var x = i * (260 / (valores.length - 1));
-            var y = 70 - Math.round((v - min) / (max - min || 1) * 60);
-            return x + ',' + y;
-        }).join(' ');
-        return '<svg class="svgLineChart" viewBox="0 0 260 80">' +
-            '<polyline points="' + pts + '" fill="none" stroke="' + cor + '" stroke-width="2.5" stroke-linejoin="round"/>' +
+            var x = padL + i * (cW / (valores.length - 1));
+            var y = padT + cH - Math.round((v - min) / (max - min || 1) * cH);
+            return x.toFixed(1) + ',' + y.toFixed(1);
+        });
+        var fillPath = 'M ' + pts[0] + ' ' + pts.slice(1).map(function(p){return 'L '+p;}).join(' ') +
+            ' L ' + (padL + cW).toFixed(1) + ',' + (padT + cH) + ' L ' + padL + ',' + (padT + cH) + ' Z';
+        var uid = 'lg' + Math.random().toString(36).slice(2,7);
+        var fillColor = cor === '#e53e3e' ? 'rgba(229,62,62,0.1)' : 'rgba(13,91,42,0.10)';
+        var xLabels = '';
+        if (labels) {
+            var step = Math.max(1, Math.floor(valores.length / 5));
+            for (var i = 0; i < valores.length; i += step) {
+                var lx = padL + i * (cW / (valores.length - 1));
+                xLabels += '<text x="' + lx.toFixed(1) + '" y="' + (H-4) + '" text-anchor="middle" font-size="7" fill="#999">' + labels[i] + '</text>';
+            }
+        }
+        return '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:' + H + 'px;">' +
+            '<defs><linearGradient id="' + uid + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="' + cor + '" stop-opacity="0.25"/><stop offset="100%" stop-color="' + cor + '" stop-opacity="0"/></linearGradient></defs>' +
+            grids + yLabels +
+            '<path d="' + fillPath + '" fill="url(#' + uid + ')"/>' +
+            '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + cor + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+            pts.map(function(p,i){return i%Math.max(1,Math.floor(pts.length/6))===0?'<circle cx="'+p.split(',')[0]+'" cy="'+p.split(',')[1]+'" r="2.5" fill="'+cor+'" stroke="white" stroke-width="1"/>':'';}).join('') +
+            xLabels + '</svg>';
+    }
+
+    /* ── Gráfico dois linhas SVG (Entradas/Saídas) ─────────── */
+    function twoLineChart(vals1, vals2, cor1, cor2, labelTotal1, labelTotal2) {
+        cor1 = cor1 || '#0D5B2A'; cor2 = cor2 || '#e53e3e';
+        var W = 300; var H = 140;
+        var padL = 38; var padB = 36; var padT = 10; var padR = 8;
+        var cW = W - padL - padR; var cH = H - padB - padT;
+        var allVals = vals1.concat(vals2);
+        var max = Math.max.apply(null, allVals) || 1;
+        var min = 0;
+        var nGrid = 4;
+        var grids = '';
+        var yLabels = '';
+        for (var g = 0; g <= nGrid; g++) {
+            var gy = padT + cH - Math.round(g / nGrid * cH);
+            var gv = Math.round(g / nGrid * max);
+            grids += '<line x1="' + padL + '" y1="' + gy + '" x2="' + (W-padR) + '" y2="' + gy + '" stroke="#f0f0f0" stroke-width="1"/>';
+            yLabels += '<text x="' + (padL-4) + '" y="' + (gy+4) + '" text-anchor="end" font-size="8" fill="#aaa">' + (gv >= 1000 ? (gv/1000).toFixed(0)+'k' : gv) + '</text>';
+        }
+        function makePts(vals) {
+            return vals.map(function(v, i) {
+                var x = padL + i * (cW / (vals.length - 1));
+                var y = padT + cH - Math.round((v - min) / (max - min || 1) * cH);
+                return x.toFixed(1) + ',' + y.toFixed(1);
+            });
+        }
+        function makeFill(pts, cor) {
+            var uid = 'lg2' + Math.random().toString(36).slice(2,7);
+            var path = 'M ' + pts[0] + ' ' + pts.slice(1).map(function(p){return 'L '+p;}).join(' ') +
+                ' L ' + (padL+cW).toFixed(1) + ',' + (padT+cH) + ' L ' + padL + ',' + (padT+cH) + ' Z';
+            return '<defs><linearGradient id="' + uid + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="' + cor + '" stop-opacity="0.2"/><stop offset="100%" stop-color="' + cor + '" stop-opacity="0"/></linearGradient></defs>' +
+                '<path d="' + path + '" fill="url(#' + uid + ')"/>';
+        }
+        var pts1 = makePts(vals1); var pts2 = makePts(vals2);
+        var footerY = H - 6;
+        var footer = '<text x="' + padL + '" y="' + footerY + '" font-size="8" fill="' + cor1 + '" font-weight="600">Entradas: ' + (labelTotal1||'') + '</text>' +
+            '<text x="' + (W/2+4) + '" y="' + footerY + '" font-size="8" fill="' + cor2 + '" font-weight="600">Saídas: ' + (labelTotal2||'') + '</text>';
+        return '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:' + H + 'px;">' +
+            makeFill(pts1,cor1) + makeFill(pts2,cor2) + grids + yLabels +
+            '<polyline points="' + pts1.join(' ') + '" fill="none" stroke="' + cor1 + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+            '<polyline points="' + pts2.join(' ') + '" fill="none" stroke="' + cor2 + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+            '<rect x="' + padL + '" y="' + (H-22) + '" width="7" height="3" fill="' + cor1 + '" rx="1"/>' +
+            '<text x="' + (padL+10) + '" y="' + (H-18) + '" font-size="7.5" fill="#555">Entradas</text>' +
+            '<rect x="' + (W/2) + '" y="' + (H-22) + '" width="7" height="3" fill="' + cor2 + '" rx="1"/>' +
+            '<text x="' + (W/2+10) + '" y="' + (H-18) + '" font-size="7.5" fill="#555">Saídas</text>' +
             '</svg>';
     }
 
-    /* ── Mini gráfico dona SVG ────────────────────────────── */
-    function donutChart(fatias, cores) {
+    /* ── Gráfico donut SVG com legenda ────────────────────── */
+    function donutChart(fatias, cores, labels, centerLabel) {
         cores = cores || ['#0D5B2A','#B9F7A8','#FFD566','#FF8A65'];
+        labels = labels || [];
         var total = fatias.reduce(function(s,v){return s+v;},0) || 1;
-        var r = 30; var cx = 40; var cy = 40;
+        var r = 34; var cx = 44; var cy = 44;
         var circum = 2 * Math.PI * r;
         var offset = 0;
         var segs = fatias.map(function(v, i) {
             var pct = v / total;
             var dash = pct * circum;
             var seg = '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none"' +
-                ' stroke="' + (cores[i] || '#ddd') + '" stroke-width="14"' +
-                ' stroke-dasharray="' + dash.toFixed(1) + ' ' + circum.toFixed(1) + '"' +
-                ' stroke-dashoffset="-' + offset.toFixed(1) + '"' +
+                ' stroke="' + (cores[i] || '#ddd') + '" stroke-width="16"' +
+                ' stroke-dasharray="' + dash.toFixed(2) + ' ' + circum.toFixed(2) + '"' +
+                ' stroke-dashoffset="' + (-offset).toFixed(2) + '"' +
                 ' transform="rotate(-90 ' + cx + ' ' + cy + ')"/>';
             offset += dash;
             return seg;
         }).join('');
-        return '<svg viewBox="0 0 80 80" width="80" height="80">' + segs + '</svg>';
+        var cText = centerLabel || '';
+        var legendItems = fatias.map(function(v, i) {
+            var pct = (v/total*100).toFixed(1);
+            var lbl = labels[i] || ('Série '+(i+1));
+            return '<div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;">' +
+                '<span style="width:10px;height:10px;border-radius:2px;background:' + (cores[i]||'#ddd') + ';flex-shrink:0;"></span>' +
+                '<span style="font-size:11px;color:#555;white-space:nowrap;">' + lbl + '</span>' +
+                '<span style="font-size:11px;color:#888;margin-left:auto;padding-left:6px;">' + pct + '%</span>' +
+                '</div>';
+        }).join('');
+        var svgDonut = '<svg viewBox="0 0 88 88" width="88" height="88" style="flex-shrink:0;">' +
+            segs +
+            (cText ? '<text x="' + cx + '" y="' + (cy-4) + '" text-anchor="middle" font-size="9" fill="#555" font-weight="600">' + cText + '</text>' : '') +
+            '</svg>';
+        return '<div style="display:flex;align-items:center;gap:10px;padding-top:6px;">' + svgDonut +
+            '<div style="flex:1;min-width:0;">' + legendItems + '</div></div>';
     }
 
     /* ── Mini chart box ───────────────────────────────────── */
     function miniChart(titulo, valor, chart, exportId) {
         return '<div class="miniChartBox">' +
-            '<button class="miniChartExport" onclick="CL.toast(\'Exportando...\')">&#128196;</button>' +
+            '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">' +
             '<p class="miniChartTitulo">' + titulo + '</p>' +
+            '<button class="miniChartExport" onclick="CL.toast(\'Exportando...\')">&#128196;</button>' +
+            '</div>' +
             (valor ? '<p class="miniChartValor">' + valor + '</p>' : '') +
             chart +
             '</div>';
@@ -209,8 +319,12 @@
         }).join('');
 
         var fatDados = [480,690,520,750,630,880,720,960,840,500,670,1200];
-        var catDados = [total*0.45, total*0.30, total*0.15, total*0.10];
-        var pagDados = [total*0.45, total*0.25, total*0.18, total*0.12];
+        var fatLabels = ['Abr','Abr','Mai','Mai','Mai','Mai','Jun','Jun','Jun','Jun','Jun','Jun'];
+        var catVals = [total*0.45, total*0.30, total*0.15, total*0.10];
+        var catLabels = ['Chás','Kits','Acess.','Outros'];
+        var catCores = ['#0D5B2A','#B9F7A8','#FFD566','#FF8A65'];
+        var pagVals = [total*0.45, total*0.25, total*0.18, total*0.12];
+        var pagLabels = ['Pix','Dinheiro','Débito','Crédito'];
 
         return topoRel('Relatórios de Vendas','Acompanhe o desenvolvimento das vendas no período selecionado','csvVendas',true) +
             filtros([{label:'Categoria',opts:['Todas as categorias','Chá','Aromatizador','Acessório']},{label:'Produto',opts:['Todos os tipos'].concat(DB.produtos.map(function(p){return p.nome;}))}]) +
@@ -221,9 +335,9 @@
                 kpiCard('&#128203;','laranja','Pedidos Realizados',DB.vendas.length,'Total de pedidos','') +
             '</div>' +
             '<div class="miniChartsGrid">' +
-                miniChart('FATURAMENTO DIÁRIO (R$)',null,lineChart(fatDados),'csvVenDia') +
-                miniChart('FATURAMENTO POR CATEGORIA (R$)',null,barChart(catDados),'csvVenCat') +
-                miniChart('VENDAS POR FORMA DE PAGAMENTO (R$)',null,barChart(pagDados,'#B9F7A8'),'csvVenPag') +
+                miniChart('Faturamento diário (R$)',null,lineChart(fatDados,'#0D5B2A',fatLabels),'csvVenDia') +
+                miniChart('Faturamento por categoria (R$)',null,donutChart(catVals,catCores,catLabels,fmt.moeda(total)),'csvVenCat') +
+                miniChart('Vendas por forma de pagamento (R$)',null,barChart(pagVals,'#0D5B2A',pagLabels),'csvVenPag') +
             '</div>' +
             '<div class="relConteiner">' +
                 topoTabela('Detalhamento do estoque','buscaVendasRel','csvVendas') +
@@ -345,7 +459,9 @@
         }).join('');
 
         var tiposDados = [valProd, valIns];
+        var tiposLabels = ['Produtos','Insumos'];
         var sitDados = [totItens-baixo-zero, baixo, zero];
+        var sitLabels = ['Normal','Estoque baixo','Sem estoque'];
 
         return topoRel('Relatórios de Insumos','Acompanhe a situação atual de todos os itens em estoque','csvInsumos',true) +
             filtros([{label:'Categoria',opts:['Todas as categorias','Flor','Erva','Especiaria']},{label:'Tipo de item',opts:['Todos os tipos','Produto','Insumo']}]) +
@@ -356,9 +472,9 @@
                 kpiCard('&#128230;','azul','Total de itens',totItens,'Produtos e insumos','') +
             '</div>' +
             '<div class="miniChartsGrid">' +
-                miniChart('VALOR DE ESTOQUE POR TIPO',null,donutChart(tiposDados),'csvEstTipo') +
-                miniChart('SITUAÇÃO DE ESTOQUE (QUANTIDADE DE ITENS)',null,donutChart(sitDados,['#0D5B2A','#FFD566','#e53e3e']),'csvEstSit') +
-                miniChart('ENTRADAS X SAÍDAS (QUANTIDADE)',null,barChart([totItens*3,totItens*2.5],'#0D5B2A'),'csvEstMov') +
+                miniChart('Valor de estoque por tipo',null,donutChart(tiposDados,['#0D5B2A','#B9F7A8'],tiposLabels,fmt.moeda(total)),'csvEstTipo') +
+                miniChart('Situação de estoque (itens)',null,donutChart(sitDados,['#0D5B2A','#FFD566','#e53e3e'],sitLabels),'csvEstSit') +
+                miniChart('Entradas x Saídas (quantidade)',null,barChart([totItens*3,totItens*2],'#0D5B2A',['Entradas','Saídas']),'csvEstMov') +
             '</div>' +
             '<div class="relConteiner">' +
                 topoTabela('Detalhamento do estoque','buscaInsumos','csvInsumosD') +
@@ -423,9 +539,12 @@
             '<tr class="rowSaida"><td>&nbsp;&nbsp;Total de saídas</td><td>—</td><td>—</td><td style="color:#e53e3e;font-weight:700;">'+fmt.moeda(saidas)+'</td><td style="color:#e53e3e;font-weight:700;">'+fmt.moeda(saidas)+'</td></tr>' +
             '<tr style="background:#e8f5e0;font-weight:700;"><td>Saldo do período</td><td>—</td><td>'+fmt.moeda(entradas)+'</td><td>—</td><td style="color:#0D5B2A;">'+fmt.moeda(lucro)+'</td></tr>';
 
-        var fatDados = [entradas*0.08, entradas*0.12, entradas*0.09, entradas*0.15, entradas*0.11, entradas*0.18, entradas*0.10, entradas*0.17];
-        var evolDados = [entradas*0.08, entradas*0.12, entradas*0.09, entradas*0.15];
-        var distDados = [entradas*0.45, entradas*0.30, entradas*0.15, entradas*0.10];
+        var entDados = [entradas*0.08, entradas*0.12, entradas*0.09, entradas*0.15, entradas*0.11, entradas*0.18, entradas*0.10, entradas*0.17];
+        var saiDados = [saidas*0.09,  saidas*0.08,  saidas*0.12, saidas*0.10, saidas*0.14,  saidas*0.11,  saidas*0.13,  saidas*0.09];
+        var evolDados = [entradas*0.08, entradas*0.12, entradas*0.09, entradas*0.15, entradas*0.11, entradas*0.18];
+        var evolLabels = ['Jan','Fev','Mar','Abr','Mai','Jun'];
+        var distDados = [saidas*0.45, saidas*0.30, saidas*0.15, saidas*0.10];
+        var distLabels = ['Custo de prod.','Despesas op.','Impostos e tax.','Outros'];
 
         return topoRel('Relatórios de Finanças','Acompanhe o desempenho financeiro da empresa no período selecionado','csvFinancas',true) +
             filtros([{label:'Categoria',opts:['Todas as categorias']},{label:'Forma de pagamento',opts:['Todos os tipos','Pix','Dinheiro','Débito','Crédito']}]) +
@@ -436,9 +555,9 @@
                 kpiCard('&#9711;','azul','Margem de lucro',marg+'%','Média de margem de lucro','') +
             '</div>' +
             '<div class="miniChartsGrid">' +
-                miniChart('ENTRADAS X SAÍDAS (R$)',null,lineChart(fatDados),'csvFinE') +
-                miniChart('EVOLUÇÃO DO FATURAMENTO (R$)',null,barChart(evolDados),'csvFinEv') +
-                miniChart('DISTRIBUIÇÃO DE DESPESAS (%)',null,donutChart(distDados),'csvFinD') +
+                miniChart('Entradas e Saídas (R$)',null,twoLineChart(entDados,saiDados,'#0D5B2A','#e53e3e',fmt.moeda(entradas),fmt.moeda(saidas)),'csvFinE') +
+                miniChart('Evolução do Faturamento (R$)',null,barChart(evolDados,'#0D5B2A',evolLabels),'csvFinEv') +
+                miniChart('Distribuição de Despesas (%)',null,donutChart(distDados,['#0D5B2A','#FFD566','#e53e3e','#4A90D9'],distLabels),'csvFinD') +
             '</div>' +
             '<div class="relConteiner">' +
                 '<div style="font-size:14px;font-weight:700;color:#222;margin-bottom:12px;">Resumo Financeiro</div>' +
@@ -533,6 +652,7 @@
         var dados1 = DB.receitas.map(function(r){return parseFloat(r.preco);});
         var dados2 = DB.receitas.map(function(r){return parseFloat(r.margem);});
         var dados3 = DB.receitas.map(function(r){return r.custo;});
+        var recNomes = DB.receitas.map(function(r){return r.nome.split(' ')[1]||r.nome.slice(0,6);});
 
         return topoRel('Relatório margem de lucro','Acompanhe a margem de lucro da empresa no período selecionado','csvMargem',true) +
             filtros([{label:'Categoria',opts:['Todas as categorias']},{label:'Produto',opts:['Todos os tipos']}]) +
@@ -543,9 +663,9 @@
                 kpiCard('&#9711;','verde','Margem de lucro',margemPct+'%','Do período','') +
             '</div>' +
             '<div class="miniChartsGrid">' +
-                miniChart('ANÁLISE DE LUCRATIVIDADE (% CONTRIBUIÇÃO)',null,lineChart(dados1),'csvMargA') +
-                miniChart('EVOLUÇÃO DA MARGEM DE LUCRO (%)',null,lineChart(dados2.map(function(v){return parseFloat(v);})),'csvMargEv') +
-                miniChart('MARGEM DE CONTRIBUIÇÃO X RECEITA (R$)',null,barChart(dados3),'csvMargC') +
+                miniChart('Análise de lucratividade (R$)',null,lineChart(dados1,'#0D5B2A',recNomes),'csvMargA') +
+                miniChart('Evolução da margem de lucro (%)',null,lineChart(dados2.map(function(v){return parseFloat(v);}),'#4A90D9',recNomes),'csvMargEv') +
+                miniChart('Margem de contribuição x receita (R$)',null,barChart(dados3,'#B9F7A8',recNomes),'csvMargC') +
             '</div>' +
             '<div class="relConteiner">' +
                 '<div style="font-size:14px;font-weight:700;color:#222;margin-bottom:12px;">Performance dos produtos</div>' +
@@ -651,7 +771,11 @@
         var ticket = totPed > 0 ? totFat/totPed : 0;
         var fatDados = [200,350,280,450,320,600,410,720,380,540];
         var tickDados = [300,420,380,500,440,610,480,620];
+        var tickLabels = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago'];
         var barDados = DB.clientes.map(function(c){return c.valorTotal;});
+        var barLabels = DB.clientes.map(function(c){return c.nome.split(' ')[0];});
+        var freqLabels = ['1-2x','3-5x','6-10x','+10x'];
+        var freqCores = ['#0D5B2A','#B9F7A8','#FFD566','#FF8A65'];
 
         var rows = DB.clientes.map(function(c) {
             var compras = DB.vendas.filter(function(v){return v.cliente===c.nome;});
@@ -676,9 +800,9 @@
                 kpiCard('&#127991;','verde','Ticket médio geral',fmt.moeda(ticket),'por cliente','') +
             '</div>' +
             '<div class="miniChartsGrid">' +
-                miniChart('FREQUÊNCIA DE COMPRA',null,donutChart([totPed*0.4,totPed*0.3,totPed*0.2,totPed*0.1]),'csvCliFreq') +
-                miniChart('EVOLUÇÃO DO TICKET MÉDIO',null,lineChart(tickDados),'csvCliTick') +
-                miniChart('CLIENTES COM MAIOR FATURAMENTO (TOP 5)',null,barChart(barDados),'csvCliTop') +
+                miniChart('Frequência de compra',null,donutChart([totPed*0.4,totPed*0.3,totPed*0.2,totPed*0.1],freqCores,freqLabels),'csvCliFreq') +
+                miniChart('Evolução do ticket médio',null,lineChart(tickDados,'#0D5B2A',tickLabels),'csvCliTick') +
+                miniChart('Clientes com maior faturamento',null,barChart(barDados,'#0D5B2A',barLabels),'csvCliTop') +
             '</div>' +
             '<div class="relConteiner">' +
                 topoTabela('Desempenho dos clientes','buscaClientesRel','csvClientesD') +
@@ -713,8 +837,11 @@
         }).join('');
 
         var evolDados = DB.insumos.map(function(i){return i.preco*i.estoque*0.3;});
-        var compDados = Object.keys(porCat).map(function(k){return porCat[k].rec;});
-        var rentDados = Object.keys(porCat).map(function(k){return (porCat[k].rec-porCat[k].cus)/porCat[k].rec*100;});
+        var evolLabels = DB.insumos.map(function(i){return i.nome.slice(0,6);});
+        var compKeys = Object.keys(porCat);
+        var compDados = compKeys.map(function(k){return porCat[k].rec;});
+        var compCores = ['#0D5B2A','#B9F7A8','#FFD566'];
+        var rentDados = compKeys.map(function(k){return (porCat[k].rec-porCat[k].cus)/porCat[k].rec*100;});
 
         return topoRel('Relatório receitas','Visão completa da lucratividade, custo e rentabilidade dos produtos','csvReceitas',true) +
             filtros([{label:'Receita',opts:['Todas'].concat(DB.receitas.map(function(r){return r.nome;}))}]) +
@@ -725,9 +852,9 @@
                 kpiCard('&#128178;','verde','Lucro bruto',fmt.moeda(totLuc),'Do período','') +
             '</div>' +
             '<div class="miniChartsGrid">' +
-                miniChart('EVOLUÇÃO DA RECEITA',null,lineChart(evolDados),'csvRecEv') +
-                miniChart('COMPOSIÇÃO DA RECEITA POR CATEGORIA',null,donutChart(compDados),'csvRecComp') +
-                miniChart('RENTABILIDADE MÉDIA NO PERÍODO',null,barChart(rentDados.map(Math.abs)),'csvRecRent') +
+                miniChart('Evolução da receita',null,lineChart(evolDados,'#0D5B2A',evolLabels),'csvRecEv') +
+                miniChart('Composição da receita por categoria',null,donutChart(compDados,compCores,compKeys,fmt.moeda(totRec)),'csvRecComp') +
+                miniChart('Rentabilidade média no período (%)',null,barChart(rentDados.map(Math.abs),'#0D5B2A',compKeys),'csvRecRent') +
             '</div>' +
             '<div class="relConteiner">' +
                 topoTabela('Desempenho e rentabilidade dos insumos','buscaRecInsumos','csvRecInsD') +
@@ -839,8 +966,12 @@
         },0);
 
         var dadosProd = DB.producoes.map(function(p){return p.qtd;});
+        var dadosProdLabels = DB.producoes.map(function(p){return p.receita.split(' ')[1]||p.receita.slice(0,5);});
         var dadosMais = DB.producoes.map(function(p){return p.qtd;});
+        var dadosMaisLabels = DB.producoes.map(function(p){return p.receita.split(' ')[0];});
         var dadosIns  = DB.insumos.map(function(i){return i.estoque*0.2;});
+        var dadosInsLabels = DB.insumos.map(function(i){return i.nome.slice(0,5);});
+        var maisDonutCores = ['#0D5B2A','#B9F7A8','#FFD566'];
 
         var rows = DB.producoes.map(function(p) {
             var r=DB.receitas.find(function(r){return r.nome===p.receita;});
@@ -858,9 +989,9 @@
                 kpiCard('&#128230;','verde','Insumos consumidos',DB.insumos.length,'Insumos utilizados','') +
             '</div>' +
             '<div class="miniChartsGrid">' +
-                miniChart('PRODUTOS TOTAL POR PERÍODO',null,barChart(dadosProd),'csvProdT') +
-                miniChart('PRODUTOS MAIS PRODUZIDOS',null,barChart(dadosMais,'#B9F7A8'),'csvProdM') +
-                miniChart('INSUMOS CONSUMIDOS',null,lineChart(dadosIns),'csvProdI') +
+                miniChart('Produtos total por período',null,barChart(dadosProd,'#0D5B2A',dadosProdLabels),'csvProdT') +
+                miniChart('Produtos mais produzidos',null,donutChart(dadosMais,maisDonutCores,dadosMaisLabels),'csvProdM') +
+                miniChart('Insumos consumidos',null,lineChart(dadosIns,'#4A90D9',dadosInsLabels),'csvProdI') +
             '</div>' +
             '<div class="relConteiner">' +
                 topoTabela('Produtos total por período','buscaProd','csvProdD') +
